@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Portal PIP Sekolah - Mandiri Siswa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    :root { --primary-color: #0d6efd; --bg-color: #f4f6f9; }
+    body { background-color: var(--bg-color); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding-bottom: 30px; }
+    .app-header { background: linear-gradient(135deg, #0d6efd, #0a58ca); color: white; padding: 20px 15px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+    .card-custom { border: none; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .badge-status { font-size: 0.85rem; padding: 6px 12px; border-radius: 20px; }
+    .preview-box { width: 100%; height: 180px; border: 2px dashed #cbd5e1; border-radius: 12px; display: flex; align-items: center; justify-content: center; background-color: #fff; overflow: hidden; position: relative; }
+    .preview-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  </style>
+</head>
+<body>
+
+  <div class="app-header text-center mb-3">
+    <h5 class="fw-bold mb-1"><i class="bi bi-mortarboard-fill me-2"></i>Portal Layanan PIP</h5>
+    <p class="small mb-0 opacity-75">Cek Info Mandiri & Lapor Aktivasi / Pencairan</p>
+  </div>
+
+  <div class="container" style="max-width: 500px;">
+
+    <!-- CARI NISN / NIK -->
+    <div class="card card-custom p-3 mb-3">
+      <label class="form-label fw-bold small text-secondary">MASUKKAN NISN ATAU NIK SISWA</label>
+      <div class="input-group">
+        <input type="text" id="inputKeyword" class="form-control" placeholder="Contoh: 0058xxxxxx / 3507xxxxxx" inputmode="numeric">
+        <button class="btn btn-primary fw-bold" type="button" onclick="cariData()">
+          <i class="bi bi-search me-1"></i> Cari
+        </button>
+      </div>
+      <div id="searchSpinner" class="text-center my-3 d-none">
+        <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+        <span class="small text-muted ms-2">Mencari data SIPINTAR...</span>
+      </div>
+    </div>
+
+    <!-- HASIL DATA SISWA -->
+    <div id="cardResult" class="card card-custom p-3 mb-3 d-none">
+      <div class="d-flex justify-content-between align-items-start border-bottom pb-2 mb-2">
+        <div>
+          <h6 class="fw-bold text-primary mb-0" id="resNama">-</h6>
+          <small class="text-muted">Kelas: <span id="resKelas">-</span> • L/P: <span id="resLp">-</span></small>
+        </div>
+        <span class="badge bg-light text-dark border" id="resTahap">-</span>
+      </div>
+
+      <div class="row g-2 small mb-3">
+        <div class="col-6"><strong>NISN:</strong> <span id="resNisn">-</span></div>
+        <div class="col-6"><strong>NIK:</strong> <span id="resNik">-</span></div>
+        <div class="col-6"><strong>No. Rekening:</strong> <span id="resNoRek">-</span></div>
+        <div class="col-6"><strong>VA Bank:</strong> <span id="resVa">-</span></div>
+        <div class="col-6"><strong>Nominal:</strong> <span id="resNominal" class="text-success fw-bold">-</span></div>
+        <div class="col-6"><strong>No. HP:</strong> <span id="resHp">-</span></div>
+        <div class="col-12"><strong>Data Keluarga:</strong> <span id="resKeluarga">-</span></div>
+      </div>
+
+      <div class="row g-2 text-center mb-3">
+        <div class="col-6">
+          <div class="p-2 border rounded bg-light">
+            <div class="small text-muted">Aktivasi</div>
+            <span id="badgeAktivasi" class="badge badge-status bg-secondary">Memuat...</span>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="p-2 border rounded bg-light">
+            <div class="small text-muted">Pencairan</div>
+            <span id="badgeCair" class="badge badge-status bg-secondary">Memuat...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info py-2 px-3 mb-0 small">
+        <i class="bi bi-info-circle-fill me-1"></i> <strong>Instruksi Pengelola:</strong>
+        <div id="resInstruksi" class="mt-1"></div>
+      </div>
+    </div>
+
+    <!-- TAB AKSI -->
+    <div id="cardActions" class="card card-custom p-3 d-none">
+      <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <button class="nav-link active small py-2 fw-bold" id="tab-lapor-tab" data-bs-toggle="pill" data-bs-target="#tab-lapor">
+            <i class="bi bi-camera-fill me-1"></i> Lapor Mandiri
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link small py-2 fw-bold" id="tab-info-tab" data-bs-toggle="pill" data-bs-target="#tab-info">
+            <i class="bi bi-journal-text me-1"></i> Panduan
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="pills-tabContent">
+        <!-- FORM LAPOR MANDIRI -->
+        <div class="tab-pane fade show active" id="tab-lapor">
+          <form id="formLaporMandiri">
+            <div class="mb-2">
+              <label class="form-label small fw-bold">Jenis Laporan</label>
+              <select id="laporJenis" class="form-select form-select-sm" required>
+                <option value="Lapor Aktivasi Rekening">Lapor Aktivasi Rekening</option>
+                <option value="Lapor Pencairan Dana">Lapor Pencairan Dana</option>
+              </select>
+            </div>
+            <div class="mb-2">
+              <label class="form-label small fw-bold">Tanggal Pengurusan di Bank</label>
+              <input type="date" id="laporTanggal" class="form-control form-control-sm" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label small fw-bold">Nominal yang Dicairkan (Rp) - <em>Opsional</em></label>
+              <input type="number" id="laporNominal" class="form-control form-control-sm" placeholder="Contoh: 450000">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Foto Buku Tabungan / Slip Struk Bank</label>
+              <input type="file" id="cameraInput" accept="image/*" capture="environment" class="form-control form-control-sm mb-2" required>
+              <div class="preview-box" id="previewContainer">
+                <span class="text-muted small" id="previewPlaceholder">
+                  <i class="bi bi-camera fs-3 d-block text-center"></i>Ketuk tombol di atas untuk buka kamera
+                </span>
+                <img id="imgPreview" class="d-none">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Catatan Tambahan (Opsional)</label>
+              <textarea id="laporCatatan" class="form-control form-control-sm" rows="2" placeholder="Catatan jika ada kendala..."></textarea>
+            </div>
+
+            <button type="button" class="btn btn-success w-100 fw-bold" id="btnKirim" onclick="submitLaporan()">
+              <i class="bi bi-send-fill me-1"></i> Kirim Laporan Mandiri
+            </button>
+          </form>
+        </div>
+
+        <!-- PANDUAN -->
+        <div class="tab-pane fade" id="tab-info">
+          <div class="small">
+            <h6 class="fw-bold">Syarat Berkas ke Bank Penyalur:</h6>
+            <ol class="ps-3 mb-3">
+              <li>Surat Keterangan Kepala Sekolah.</li>
+              <li>Fotokopi KTP Orang Tua/Wali & KK.</li>
+              <li>Buku Tabungan SimPel / Kartu KIP.</li>
+            </ol>
+            <h6 class="fw-bold">Kontak Bantuan Pengelola PIP:</h6>
+            <p class="mb-0 text-muted">Ruang Tata Usaha / Pengelola PIP Sekolah</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const APPS_SCRIPT_URL = "PASTE_URL_WEB_APP_APPS_SCRIPT_DISINI";
+
+    let currentSiswaData = null;
+    let compressedBase64Image = "";
+
+    function cariData() {
+      const keyword = document.getElementById("inputKeyword").value.trim();
+      if (!keyword) return alert("Masukkan NISN atau NIK!");
+
+      document.getElementById("searchSpinner").classList.remove("d-none");
+      document.getElementById("cardResult").classList.add("d-none");
+      document.getElementById("cardActions").classList.add("d-none");
+
+      fetch(`${APPS_SCRIPT_URL}?action=cariData&keyword=${encodeURIComponent(keyword)}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("searchSpinner").classList.add("d-none");
+          if (!data.found) {
+            alert("Data tidak ditemukan di Master SIPINTAR sekolah.");
+            return;
+          }
+
+          currentSiswaData = data;
+
+          document.getElementById("resNama").innerText = data.nama;
+          document.getElementById("resKelas").innerText = data.kelas;
+          document.getElementById("resLp").innerText = data.lp;
+          document.getElementById("resTahap").innerText = data.tahap;
+          document.getElementById("resNisn").innerText = data.nisn;
+          document.getElementById("resNik").innerText = data.nikMasked;
+          document.getElementById("resNoRek").innerText = data.noRekMasked;
+          document.getElementById("resVa").innerText = data.vaMasked;
+          document.getElementById("resNominal").innerText = "Rp " + Number(data.nominal || 0).toLocaleString("id-ID");
+          document.getElementById("resHp").innerText = data.hpMasked;
+          document.getElementById("resKeluarga").innerText = data.keluarga;
+          document.getElementById("resInstruksi").innerText = data.instruksi;
+
+          setBadge("badgeAktivasi", data.statusAktivasi);
+          setBadge("badgeCair", data.statusCair);
+
+          document.getElementById("cardResult").classList.remove("d-none");
+          document.getElementById("cardActions").classList.remove("d-none");
+        })
+        .catch(err => {
+          document.getElementById("searchSpinner").classList.add("d-none");
+          alert("Gagal terhubung ke server: " + err.toString());
+        });
+    }
+
+    function setBadge(elemId, status) {
+      const el = document.getElementById(elemId);
+      el.innerText = status;
+      if (status.toString().toLowerCase().includes("sudah")) {
+        el.className = "badge badge-status bg-success";
+      } else {
+        el.className = "badge badge-status bg-warning text-dark";
+      }
+    }
+
+    document.getElementById("cameraInput").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement("canvas");
+          const MAX_WIDTH = 1000;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          compressedBase64Image = canvas.toDataURL("image/jpeg", 0.7);
+
+          const imgPreview = document.getElementById("imgPreview");
+          imgPreview.src = compressedBase64Image;
+          imgPreview.classList.remove("d-none");
+          document.getElementById("previewPlaceholder").classList.add("d-none");
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function submitLaporan() {
+      if (!currentSiswaData) return alert("Cari data siswa terlebih dahulu!");
+      const tglPengurusan = document.getElementById("laporTanggal").value;
+      if (!tglPengurusan || !compressedBase64Image) {
+        return alert("Lengkapi tanggal pengurusan dan ambil foto bukti!");
+      }
+
+      const btnKirim = document.getElementById("btnKirim");
+      btnKirim.disabled = true;
+      btnKirim.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Mengirim Laporan...`;
+
+      const payload = {
+        action: "kirimLaporan",
+        nisn: currentSiswaData.nisn,
+        nama: currentSiswaData.nama,
+        lp: currentSiswaData.lp,
+        kelas: currentSiswaData.kelas,
+        jenisLaporan: document.getElementById("laporJenis").value,
+        tanggalPengurusan: tglPengurusan,
+        nominal: document.getElementById("laporNominal").value,
+        catatan: document.getElementById("laporCatatan").value,
+        base64Image: compressedBase64Image
+      };
+
+      fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(res => {
+        btnKirim.disabled = false;
+        btnKirim.innerHTML = `<i class="bi bi-send-fill me-1"></i> Kirim Laporan Mandiri`;
+
+        if (res.success) {
+          alert("Laporan mandiri berhasil dikirim! Terima kasih.");
+          location.reload();
+        } else {
+          alert("Gagal mengirim laporan: " + res.message);
+        }
+      })
+      .catch(err => {
+        btnKirim.disabled = false;
+        btnKirim.innerHTML = `<i class="bi bi-send-fill me-1"></i> Kirim Laporan Mandiri`;
+        alert("Terjadi kesalahan jaringan: " + err.toString());
+      });
+    }
+  </script>
+</body>
+</html>
