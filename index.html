@@ -266,6 +266,7 @@
       const payload = {
         action: "kirimLaporan",
         nisn: currentSiswaData.nisn,
+        nik: currentSiswaData.nikAsli,
         nama: currentSiswaData.nama,
         lp: currentSiswaData.lp,
         kelas: currentSiswaData.kelas,
@@ -275,7 +276,7 @@
         catatan: document.getElementById("laporCatatan").value,
         base64Image: compressedBase64Image
       };
-
+      
       fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body: JSON.stringify(payload)
