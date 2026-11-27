@@ -3,118 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Portal PIP Sekolah</title>
+  <title>Cek Info PIP</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <style>
     :root {
-      --edu-blue: #0b5ed7;
-      --edu-dark: #084298;
-      --edu-bg: #eef3f9;
+      --pip-blue: #0b5ed7;
+      --pip-header-bg: #0d6efd;
+      --pip-bg: #f8fafc;
     }
 
     body {
-      background-color: var(--edu-bg);
+      background-color: var(--pip-bg);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      padding-bottom: 85px;
+      padding-bottom: 80px;
       color: #1e293b;
     }
 
-    /* Top Header */
-    .top-bar {
-      background: linear-gradient(135deg, var(--edu-blue), var(--edu-dark));
-      color: #fff;
-      padding: 14px 16px;
-      position: sticky;
-      top: 0;
-      z-index: 1020;
-      box-shadow: 0 3px 10px rgba(8, 66, 152, 0.2);
+    /* Top Bar Header */
+    .top-header {
+      background-color: var(--pip-header-bg);
+      color: #ffffff;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(13, 110, 253, 0.2);
     }
 
-    .emblem-badge {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.15rem;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-    }
-
-    .app-container {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 14px;
-    }
-
-    .card-ui {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
-    }
-
-    /* Ilustrasi SVG di Halaman Beranda */
-    .hero-illustration {
-      background: #f0f6ff;
-      border: 1px solid #dbeafe;
-      border-radius: 14px;
-      padding: 12px;
-      text-align: center;
-    }
-
-    /* Kartu KIP Preview */
-    .kip-card {
-      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 55%, #6d28d9 100%);
-      color: #fff;
-      border-radius: 14px;
-      padding: 14px;
-      box-shadow: 0 8px 18px rgba(29, 78, 216, 0.25);
-    }
-
-    .kip-avatar {
-      width: 58px;
-      height: 68px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1.5px solid rgba(255, 255, 255, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      flex-shrink: 0;
-    }
-
-    .status-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .preview-box {
-      width: 100%;
-      min-height: 170px;
-      max-height: 240px;
-      border: 2px dashed #93c5fd;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #f8fafc;
-      overflow: hidden;
-    }
-
-    .preview-box img {
-      max-width: 100%;
-      max-height: 230px;
+    .tutwuri-logo {
+      width: 32px;
+      height: 32px;
       object-fit: contain;
     }
 
-    /* Bottom Navigation */
+    .app-card {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Main Container UI */
+    .section-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f1f5f9;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    /* Input Search Group */
+    .search-box {
+      border: 2px solid var(--pip-header-bg);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .search-box .form-control {
+      border: none;
+      box-shadow: none;
+      font-size: 0.95rem;
+    }
+
+    .search-box .btn-search {
+      background-color: var(--pip-header-bg);
+      color: white;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border: none;
+      padding: 8px 16px;
+    }
+
+    /* Group Data Table */
+    .data-group-title {
+      font-weight: 700;
+      color: #334155;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      font-size: 0.88rem;
+    }
+
+    .data-label {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .data-value {
+      font-weight: 600;
+      color: #0f172a;
+      text-align: right;
+    }
+
+    /* Badges Status */
+    .badge-sudah {
+      background-color: #86efac;
+      color: #14532d;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+    }
+
+    .badge-belum {
+      background-color: #fef08a;
+      color: #713f12;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+    }
+
+    /* Box Panduan */
+    .info-box-koordinator {
+      background-color: #e0f2fe;
+      border: 1px solid #bae6fd;
+      border-radius: 12px;
+      padding: 14px;
+      color: #0369a1;
+      font-size: 0.83rem;
+    }
+
+    /* Bottom Navigation Bar */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -122,275 +135,217 @@
       right: 0;
       background: #ffffff;
       border-top: 1px solid #e2e8f0;
-      box-shadow: 0 -4px 14px rgba(15, 23, 42, 0.06);
-      z-index: 1030;
+      z-index: 1000;
     }
 
     .bottom-nav-inner {
-      max-width: 520px;
+      max-width: 500px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
 
-    .nav-btn {
+    .nav-item-btn {
       border: none;
-      background: transparent;
-      padding: 8px 4px;
+      background: none;
+      padding: 10px 0;
       color: #64748b;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 600;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2px;
+      gap: 3px;
     }
 
-    .nav-btn i {
-      font-size: 1.2rem;
+    .nav-item-btn i {
+      font-size: 1.3rem;
     }
 
-    .nav-btn.active {
-      color: var(--edu-blue);
+    .nav-item-btn.active {
+      color: var(--pip-header-bg);
+    }
+
+    .preview-box {
+      width: 100%;
+      min-height: 160px;
+      border: 2px dashed #cbd5e1;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8fafc;
+      overflow: hidden;
+    }
+
+    .preview-box img {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: contain;
     }
   </style>
 </head>
 <body>
 
-  <!-- TOP HEADER -->
-  <header class="top-bar">
-    <div class="d-flex align-items-center justify-content-between" style="max-width: 520px; margin: 0 auto;">
-      <div class="d-flex align-items-center gap-2">
-        <div class="emblem-badge">
-          <i class="bi bi-mortarboard-fill"></i>
-        </div>
-        <div>
-          <div class="fw-bold lh-1">Portal PIP Sekolah</div>
-          <small class="opacity-75" style="font-size: 0.72rem;">Layanan Mandiri Aktivasi & Pencairan</small>
-        </div>
-      </div>
-      <span class="badge rounded-pill bg-light text-primary fw-semibold">SIPINTAR</span>
+  <!-- HEADER PERSIS GAMBAR REFERENSI -->
+  <header class="top-header">
+    <div class="d-flex justify-content-between align-items-center" style="max-width: 500px; margin: 0 auto;">
+      <h5 class="fw-bold mb-0">Cek Info PIP</h5>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg" alt="Tut Wuri Handayani" class="tutwuri-logo">
     </div>
   </header>
 
-  <main class="app-container">
+  <main class="app-card">
 
-    <!-- KOTAK PENCARIAN NISN / NIK -->
-    <div class="card-ui p-3 mb-3">
-      <div class="text-center mb-2">
-        <div class="fw-bold text-primary"><i class="bi bi-search me-1"></i>Cek Info & Layanan PIP Siswa</div>
-        <div class="small text-muted">Masukkan NISN atau NIK untuk melihat info & melapor mandiri</div>
-      </div>
-      <div class="input-group">
-        <span class="input-group-text bg-light"><i class="bi bi-person-vcard text-primary"></i></span>
+    <!-- BLOCK PENCARIAN (HALAMAN PENCARIAN) -->
+    <div class="section-card text-center">
+      <h5 class="fw-bold text-dark mb-1">Halaman Pencarian</h5>
+      <p class="text-muted small mb-3">Cari Data Siswa</p>
+      
+      <div class="input-group search-box">
         <input type="text" id="inputKeyword" class="form-control" placeholder="Masukkan NISN atau NIK" inputmode="numeric">
-        <button class="btn btn-primary fw-bold px-3" type="button" onclick="cariData()">
-          Cari Data
+        <button class="btn btn-search" type="button" onclick="cariData()">
+          <i class="bi bi-search me-1"></i> CARI DATA
         </button>
       </div>
-      <div id="searchSpinner" class="text-center mt-2 d-none">
+      
+      <div id="searchSpinner" class="text-center mt-3 d-none">
         <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
-        <span class="small text-muted ms-2">Mencari data di database SIPINTAR...</span>
+        <span class="small text-muted ms-2">Mencari data SIPINTAR...</span>
+      </div>
+
+      <!-- ILUSTRASI GAMBAR SEBELUM SISWA MENCARI -->
+      <div id="defaultHero" class="mt-4 pt-2">
+        <svg width="180" height="110" viewBox="0 0 180 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="25" y="18" width="95" height="62" rx="8" fill="#FFFFFF" stroke="#0d6efd" stroke-width="2.5"/>
+          <rect x="35" y="28" width="28" height="22" rx="4" fill="#DBEAFE"/>
+          <circle cx="49" cy="36" r="5" fill="#0d6efd"/>
+          <path d="M41 47C41 43.5 44.5 41.5 49 41.5C53.5 41.5 57 43.5 57 47" fill="#0d6efd"/>
+          <line x1="72" y1="32" x2="108" y2="32" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+          <line x1="72" y1="42" x2="98" y2="42" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+          <rect x="35" y="58" width="44" height="10" rx="5" fill="#16A34A"/>
+          <circle cx="132" cy="68" r="20" fill="#EFF6FF" stroke="#0d6efd" stroke-width="2.5"/>
+          <circle cx="129" cy="65" r="9" stroke="#0d6efd" stroke-width="2.5"/>
+          <line x1="136" y1="72" x2="144" y2="80" stroke="#0d6efd" stroke-width="3" stroke-linecap="round"/>
+        </svg>
       </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- MENU 1: BERANDA / CEK INFO PIP                             -->
+    <!-- VIEW 1: HASIL CEK DATA (SEPERTI GAMBAR)                    -->
     <!-- ========================================================= -->
-    <section id="view-home" class="menu-view">
-      <!-- Ilustrasi saat belum mencari siswa -->
-      <div id="defaultIllustration" class="card-ui p-3 mb-3">
-        <div class="hero-illustration mb-2">
-          <svg width="150" height="95" viewBox="0 0 180 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="25" y="18" width="95" height="62" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.5"/>
-            <rect x="35" y="28" width="28" height="22" rx="4" fill="#DBEAFE"/>
-            <circle cx="49" cy="36" r="5" fill="#2563EB"/>
-            <path d="M41 47C41 43.5 44.5 41.5 49 41.5C53.5 41.5 57 43.5 57 47" fill="#2563EB"/>
-            <line x1="72" y1="32" x2="108" y2="32" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
-            <line x1="72" y1="42" x2="98" y2="42" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
-            <rect x="35" y="58" width="44" height="10" rx="5" fill="#16A34A"/>
-            <circle cx="132" cy="68" r="20" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2.5"/>
-            <circle cx="129" cy="65" r="9" stroke="#1D4ED8" stroke-width="2.5"/>
-            <line x1="136" y1="72" x2="144" y2="80" stroke="#1D4ED8" stroke-width="3" stroke-linecap="round"/>
-          </svg>
-          <div class="fw-bold small text-primary mt-1">Informasi Aktivasi & Pencairan PIP</div>
-          <div class="small text-muted">Cek status, instruksi pengelola, kartu/dokumen, lalu laporkan secara mandiri</div>
-        </div>
-        <div class="row g-2 text-center small">
-          <div class="col-4">
-            <div class="p-2 rounded bg-light border">
-              <i class="bi bi-info-circle-fill text-primary fs-5 d-block"></i>
-              <span class="fw-semibold">Info Status</span>
-            </div>
+    <section id="view-home">
+      <div id="studentDataCard" class="d-none">
+        <!-- KARTU UTAMA HASIL DATA -->
+        <div class="section-card">
+          <!-- GROUP DATA SISWA -->
+          <div class="data-group-title">Data Siswa</div>
+          <div class="data-row">
+            <span class="data-label">Nama Siswa</span>
+            <span class="data-value" id="resNama">-</span>
           </div>
-          <div class="col-4">
-            <div class="p-2 rounded bg-light border">
-              <i class="bi bi-credit-card-2-front-fill text-indigo-600 text-primary fs-5 d-block"></i>
-              <span class="fw-semibold">Kartu & File</span>
-            </div>
+          <div class="data-row">
+            <span class="data-label">NISN</span>
+            <span class="data-value" id="resNisn">-</span>
           </div>
-          <div class="col-4">
-            <div class="p-2 rounded bg-light border">
-              <i class="bi bi-camera-fill text-success fs-5 d-block"></i>
-              <span class="fw-semibold">Lapor Mandiri</span>
-            </div>
+          <div class="data-row">
+            <span class="data-label">NIK</span>
+            <span class="data-value" id="resNik">-</span>
           </div>
-        </div>
-      </div>
+          <div class="data-row">
+            <span class="data-label">No. Rekening</span>
+            <span class="data-value" id="resNoRek">-</span>
+          </div>
+          <div class="data-row mb-3">
+            <span class="data-label">Virtual Account</span>
+            <span class="data-value" id="resVa">-</span>
+          </div>
 
-      <!-- Detail Data Penerima Setelah Ditemukan -->
-      <div id="studentDetailCard" class="card-ui p-3 mb-3 d-none">
-        <div class="d-flex justify-content-between align-items-start border-bottom pb-2 mb-2">
-          <div>
-            <span class="badge bg-primary-subtle text-primary mb-1">Data Penerima PIP</span>
-            <h6 class="fw-bold mb-0" id="resNama">-</h6>
-            <small class="text-muted">Kelas: <strong id="resKelas">-</strong> • L/P: <strong id="resLp">-</strong></small>
-          </div>
-          <span class="badge bg-dark-subtle text-dark" id="resTahap">-</span>
-        </div>
+          <hr class="my-2 opacity-25">
 
-        <div class="row g-2 small mb-3">
-          <div class="col-6">
-            <div class="text-muted">NISN</div>
-            <div class="fw-semibold" id="resNisn">-</div>
+          <!-- GROUP INFO KEUANGAN -->
+          <div class="data-group-title mt-2">Info Keuangan</div>
+          <div class="data-row">
+            <span class="data-label">Nominal</span>
+            <span class="data-value" id="resNominal">-</span>
           </div>
-          <div class="col-6">
-            <div class="text-muted">NIK</div>
-            <div class="fw-semibold" id="resNik">-</div>
+          <div class="data-row">
+            <span class="data-label">Tahap</span>
+            <span class="data-value" id="resTahap">-</span>
           </div>
-          <div class="col-6">
-            <div class="text-muted">No. Rekening</div>
-            <div class="fw-semibold" id="resNoRek">-</div>
+          <div class="data-row align-items-center">
+            <span class="data-label">Aktivasi</span>
+            <span id="badgeAktivasi" class="badge-sudah">SUDAH</span>
           </div>
-          <div class="col-6">
-            <div class="text-muted">Virtual Account</div>
-            <div class="fw-semibold" id="resVa">-</div>
-          </div>
-          <div class="col-6">
-            <div class="text-muted">Nominal</div>
-            <div class="fw-bold text-success" id="resNominal">-</div>
-          </div>
-          <div class="col-6">
-            <div class="text-muted">No. HP</div>
-            <div class="fw-semibold" id="resHp">-</div>
-          </div>
-          <div class="col-12">
-            <div class="text-muted">Data Keluarga</div>
-            <div class="fw-semibold" id="resKeluarga">-</div>
+          <div class="data-row align-items-center">
+            <span class="data-label">Pencairan</span>
+            <span id="badgeCair" class="badge-belum">BELUM</span>
           </div>
         </div>
 
-        <div class="row g-2 mb-3">
-          <div class="col-6">
-            <div class="status-box">
-              <div class="small text-muted mb-1"><i class="bi bi-bank me-1"></i>Status Aktivasi</div>
-              <span id="badgeAktivasi" class="badge bg-secondary px-3 py-1">-</span>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="status-box">
-              <div class="small text-muted mb-1"><i class="bi bi-cash-coin me-1"></i>Status Pencairan</div>
-              <span id="badgeCair" class="badge bg-secondary px-3 py-1">-</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-3 rounded-3 bg-primary-subtle border border-primary-subtle small">
-          <div class="fw-bold text-primary mb-1"><i class="bi bi-megaphone-fill me-1"></i>Instruksi Pengelola PIP</div>
-          <div id="resInstruksi" class="text-dark">Tidak ada instruksi khusus.</div>
-        </div>
-
-        <div class="d-grid gap-2 mt-3">
-          <button type="button" class="btn btn-success fw-bold" onclick="switchMenu('lapor')">
-            <i class="bi bi-camera-fill me-1"></i> Lapor Aktivasi / Pencairan Mandiri
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================================= -->
-    <!-- MENU 2: KARTU PIP & DOKUMEN                               -->
-    <!-- ========================================================= -->
-    <section id="view-kartu" class="menu-view d-none">
-      <div class="card-ui p-3 mb-3">
-        <div class="d-flex align-items-center justify-content-between mb-2">
-          <h6 class="fw-bold text-primary mb-0"><i class="bi bi-credit-card-2-front-fill me-1"></i>Kartu PIP & Dokumen</h6>
-          <span class="badge bg-info-subtle text-info-emphasis" id="kartuStatusBadge">Cek NISN/NIK</span>
-        </div>
-
-        <!-- Ilustrasi Kartu PIP -->
-        <div class="kip-card mb-3">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <div class="fw-bold small"><i class="bi bi-shield-check me-1"></i>Kartu Indonesia Pintar (PIP)</div>
-            <span class="badge bg-light text-dark" id="kipTahapLabel">Info Siswa</span>
-          </div>
-          <div class="d-flex align-items-center gap-3">
-            <div class="kip-avatar">
-              <i class="bi bi-person-fill"></i>
-            </div>
-            <div class="small lh-sm">
-              <div class="fw-bold fs-6" id="kipNama">Silakan Cari NISN / NIK</div>
-              <div class="opacity-90">NISN: <span id="kipNisn">-</span></div>
-              <div class="opacity-90">Kelas: <span id="kipKelas">-</span> • L/P: <span id="kipLp">-</span></div>
-              <div class="opacity-90">Rekening: <span id="kipRek">-</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="alert alert-light border small mb-3" id="kartuInfoText">
-          <i class="bi bi-info-circle text-primary me-1"></i>
-          Cari data siswa terlebih dahulu di kolom atas untuk melihat detail kartu dan ketersediaan dokumen pendukung.
-        </div>
-
-        <h6 class="fw-bold small text-secondary mb-2"><i class="bi bi-file-earmark-text me-1"></i>Dokumen Pendukung & Panduan</h6>
-        <div class="list-group list-group-flush small">
-          <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
-            <div>
-              <i class="bi bi-file-earmark-pdf-fill text-danger me-2 fs-5"></i>
-              <strong>Panduan Aktivasi Rekening Bank</strong>
-              <div class="text-muted">Alur aktivasi SimPel sesuai bank penyalur</div>
-            </div>
-            <button class="btn btn-outline-primary btn-sm" onclick="switchMenu('panduan')">Lihat</button>
-          </div>
-          <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
-            <div>
-              <i class="bi bi-file-earmark-check-fill text-success me-2 fs-5"></i>
-              <strong>Berkas Persyaratan Pencairan</strong>
-              <div class="text-muted">KTP/KK, buku tabungan/struk & surat keterangan</div>
-            </div>
-            <button class="btn btn-outline-primary btn-sm" onclick="switchMenu('panduan')">Lihat</button>
+        <!-- BOX PANDUAN KOORDINATOR PIP (SAMA DENGAN GAMBAR) -->
+        <div class="info-box-koordinator mb-3">
+          <div class="fw-bold mb-1"><i class="bi bi-info-circle-fill me-1"></i> Panduan Koordinator PIP</div>
+          <div class="lh-sm">
+            <strong>Aktivasi:</strong> <span id="textInfoAktivasi">Silakan hubungi koordinator sekolah dengan membawa data diri lengkap.</span><br>
+            <strong>Pencairan:</strong> <span id="textInfoCair">Bawa buku tabungan dan fotokopi KIP/KK ke bank penyalur terdekat.</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ========================================================= -->
-    <!-- MENU 3: LAPOR MANDIRI (KAMERA HP)                         -->
+    <!-- VIEW 2: KARTU PIP (GOOGLE DRIVE)                          -->
     <!-- ========================================================= -->
-    <section id="view-lapor" class="menu-view d-none">
-      <div class="card-ui p-3 mb-3">
-        <h6 class="fw-bold text-success mb-1"><i class="bi bi-camera-fill me-1"></i>Lapor Mandiri Aktivasi / Pencairan</h6>
-        <p class="small text-muted mb-3">Isi data pengurusan dan ambil foto langsung menggunakan kamera HP</p>
-
-        <div id="laporAlertBelumCari" class="alert alert-warning small">
-          <i class="bi bi-exclamation-triangle-fill me-1"></i>
-          Pastikan Anda sudah mencari <strong>NISN / NIK</strong> di atas agar identitas siswa terisi otomatis.
+    <section id="view-kartu" class="d-none">
+      <div class="section-card">
+        <h6 class="fw-bold text-primary mb-2"><i class="bi bi-credit-card-2-front-fill me-1"></i> Kartu PIP Resmi</h6>
+        <div class="small text-muted mb-3" id="kartuIdentitasSingkat">
+          Cari NISN atau NIK di atas untuk melihat file kartu dari Google Drive sekolah.
         </div>
+
+        <div id="kartuDriveContainer" class="border rounded-3 p-3 bg-light text-center mb-2">
+          <div id="kartuEmptyState" class="py-3 text-muted small">
+            <i class="bi bi-folder-x fs-1 d-block text-warning mb-2"></i>
+            Belum ada data siswa yang dipilih.
+          </div>
+
+          <div id="kartuPreviewWrapper" class="d-none">
+            <img id="imgKartuResmi" src="" alt="Kartu PIP Resmi" class="img-fluid rounded border mb-2 d-none" style="max-height: 230px; object-fit: contain;">
+            <div id="pdfKartuInfo" class="p-3 bg-white rounded border mb-2 d-none small">
+              <i class="bi bi-file-earmark-pdf-fill text-danger fs-2 d-block mb-1"></i>
+              <div class="fw-bold" id="namaFileKartu">-</div>
+              <div class="text-muted">Dokumen Kartu PIP di Google Drive</div>
+            </div>
+            <div class="d-flex gap-2 justify-content-center flex-wrap mt-2">
+              <a id="btnBukaKartu" href="#" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm fw-bold">
+                <i class="bi bi-box-arrow-up-right me-1"></i> Buka Kartu
+              </a>
+              <a id="btnUnduhKartu" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm fw-bold">
+                <i class="bi bi-download me-1"></i> Download
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VIEW 3: LAPORAN MANDIRI (KAMERA HP)                       -->
+    <!-- ========================================================= -->
+    <section id="view-laporan" class="d-none">
+      <div class="section-card">
+        <h6 class="fw-bold text-success mb-1"><i class="bi bi-camera-fill me-1"></i> Form Lapor Mandiri</h6>
+        <p class="small text-muted mb-3">Lapor hasil aktivasi atau pencairan dari bank</p>
 
         <form id="formLaporMandiri">
-          <div class="row g-2 mb-2 small bg-light p-2 rounded border">
-            <div class="col-7">
-              <span class="text-muted d-block">Nama Siswa</span>
-              <strong id="laporAutoNama">-</strong>
-            </div>
-            <div class="col-5">
-              <span class="text-muted d-block">NISN / Kelas</span>
-              <strong id="laporAutoNisnKelas">-</strong>
-            </div>
+          <div class="mb-2">
+            <label class="form-label small fw-bold">Nama Siswa / NISN</label>
+            <input type="text" id="laporAutoNamaNisn" class="form-control form-control-sm bg-light" readonly placeholder="Cari NISN dulu...">
           </div>
 
           <div class="mb-2">
-            <label class="form-label small fw-bold"><i class="bi bi-tag-fill text-primary me-1"></i>Jenis Laporan</label>
+            <label class="form-label small fw-bold">Jenis Laporan</label>
             <select id="laporJenis" class="form-select form-select-sm" required>
               <option value="Lapor Aktivasi Rekening">Lapor Aktivasi Rekening</option>
               <option value="Lapor Pencairan Dana">Lapor Pencairan Dana</option>
@@ -398,130 +353,77 @@
           </div>
 
           <div class="mb-2">
-            <label class="form-label small fw-bold"><i class="bi bi-calendar-event text-primary me-1"></i>Tanggal Pengurusan</label>
+            <label class="form-label small fw-bold">Tanggal Pengurusan</label>
             <input type="date" id="laporTanggal" class="form-control form-control-sm" required>
           </div>
 
           <div class="mb-2">
-            <label class="form-label small fw-bold"><i class="bi bi-cash text-success me-1"></i>Nominal Dilaporkan (Rp) <span class="text-muted fw-normal">- Opsional</span></label>
+            <label class="form-label small fw-bold">Nominal (Rp) - <em>Opsional</em></label>
             <input type="number" id="laporNominal" class="form-control form-control-sm" placeholder="Contoh: 450000" inputmode="numeric">
           </div>
 
-          <!-- FOTO LANGSUNG DARI KAMERA HP -->
           <div class="mb-3">
-            <label class="form-label small fw-bold"><i class="bi bi-camera-reels-fill text-danger me-1"></i>Foto Buku Tabungan / Struk / Bukti</label>
+            <label class="form-label small fw-bold">Foto Buku Tabungan / Struk Bank</label>
             <input type="file" id="cameraInput" accept="image/*" capture="environment" class="form-control form-control-sm mb-2" required>
             <div class="preview-box" id="previewContainer">
-              <div class="text-center text-muted small p-2" id="previewPlaceholder">
-                <i class="bi bi-camera fs-2 d-block text-primary mb-1"></i>
-                Ketuk kolom di atas untuk membuka kamera HP & memotret bukti
-              </div>
-              <img id="imgPreview" class="d-none" alt="Pratinjau Foto Bukti">
+              <span class="text-muted small" id="previewPlaceholder">
+                <i class="bi bi-camera fs-3 d-block text-center mb-1"></i>Ambil foto bukti dengan kamera
+              </span>
+              <img id="imgPreview" class="d-none" alt="Preview Foto">
             </div>
           </div>
 
           <div class="mb-3">
-            <label class="form-label small fw-bold"><i class="bi bi-chat-left-text text-secondary me-1"></i>Catatan (Opsional)</label>
-            <textarea id="laporCatatan" class="form-control form-control-sm" rows="2" placeholder="Tulis catatan bila diperlukan..."></textarea>
+            <label class="form-label small fw-bold">Catatan (Opsional)</label>
+            <textarea id="laporCatatan" class="form-control form-control-sm" rows="2" placeholder="Catatan kendala bila ada..."></textarea>
           </div>
 
           <button type="button" class="btn btn-success w-100 fw-bold py-2" id="btnKirim" onclick="submitLaporan()">
-            <i class="bi bi-send-check-fill me-1"></i> Kirim Laporan Mandiri
+            <i class="bi bi-send-fill me-1"></i> Kirim Laporan Mandiri
           </button>
         </form>
       </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- MENU 4: PANDUAN & PENGUMUMAN                              -->
-    <!-- ========================================================= -->
-    <section id="view-panduan" class="menu-view d-none">
-      <div class="card-ui p-3 mb-3">
-        <h6 class="fw-bold text-primary mb-2"><i class="bi bi-megaphone-fill me-1"></i>Pengumuman & Panduan PIP</h6>
-
-        <div class="p-3 rounded-3 bg-light border mb-3 small">
-          <div class="fw-bold text-primary mb-1"><i class="bi bi-pin-angle-fill me-1"></i>Informasi Pengelola Sekolah</div>
-          <p class="mb-2">Pantau terus status aktivasi dan pencairan pada menu <strong>Cek Info</strong>. Setelah melakukan aktivasi atau pencairan di bank penyalur, segera kirimkan laporan mandiri beserta foto bukti melalui menu <strong>Lapor</strong>.</p>
-          <div class="fw-bold mb-1">Persyaratan Umum ke Bank Penyalur:</div>
-          <ul class="mb-0 ps-3">
-            <li>KTP Orang Tua/Wali & Kartu Keluarga (KK).</li>
-            <li>Surat Keterangan / Pengantar dari sekolah (jika diperlukan).</li>
-            <li>Buku Tabungan SimPel / Kartu KIP / identitas pendukung.</li>
-          </ul>
-        </div>
-
-        <div class="accordion accordion-flush small border rounded-3 overflow-hidden" id="faqAccordion">
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button py-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                <i class="bi bi-question-circle-fill text-primary me-2"></i>Apa perbedaan Aktivasi dan Pencairan?
-              </button>
-            </h2>
-            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                <strong>Aktivasi</strong> adalah proses pembukaan/pengaktifan rekening SimPel di bank penyalur sebelum dana dapat ditarik, sedangkan <strong>Pencairan</strong> adalah proses penarikan dana bantuan yang sudah masuk ke rekening.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed py-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                <i class="bi bi-question-circle-fill text-primary me-2"></i>Bagaimana cara melapor setelah urusan selesai?
-              </button>
-            </h2>
-            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Cari NISN/NIK Anda, buka menu <strong>Lapor</strong>, pilih jenis laporan, isi tanggal pengurusan, foto buku tabungan atau struk menggunakan kamera HP, lalu tekan <strong>Kirim Laporan Mandiri</strong>.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- BOTTOM NAVIGATION -->
+  <!-- NAVIGASI BAWAH PERSIS GAMBAR REFERENSI (Home, Status, Laporan) -->
   <nav class="bottom-nav">
     <div class="bottom-nav-inner">
-      <button type="button" class="nav-btn active" id="nav-home" onclick="switchMenu('home')">
+      <button type="button" class="nav-item-btn active" id="nav-home" onclick="switchNav('home')">
         <i class="bi bi-house-door-fill"></i>
         <span>Home</span>
       </button>
-      <button type="button" class="nav-btn" id="nav-kartu" onclick="switchMenu('kartu')">
-        <i class="bi bi-credit-card-2-front-fill"></i>
-        <span>Kartu</span>
+      <button type="button" class="nav-item-btn" id="nav-kartu" onclick="switchNav('kartu')">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Status</span>
       </button>
-      <button type="button" class="nav-btn" id="nav-lapor" onclick="switchMenu('lapor')">
-        <i class="bi bi-camera-fill"></i>
-        <span>Lapor</span>
-      </button>
-      <button type="button" class="nav-btn" id="nav-panduan" onclick="switchMenu('panduan')">
-        <i class="bi bi-info-square-fill"></i>
-        <span>Panduan</span>
+      <button type="button" class="nav-item-btn" id="nav-laporan" onclick="switchNav('laporan')">
+        <i class="bi bi-journal-text"></i>
+        <span>Laporan</span>
       </button>
     </div>
   </nav>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx4QVPZ2HgrMiJKnQcklFQG-I2qwp5HxvXfHpWzl1k_r6kRE07FaiLMUwjwYpBLzxdl/exec";
+    const APPS_SCRIPT_URL = "PASTE_URL_WEB_APP_APPS_SCRIPT_DISINI";
 
     let currentSiswaData = null;
     let compressedBase64Image = "";
 
-    function switchMenu(menuName) {
-      const views = ["home", "kartu", "lapor", "panduan"];
-      views.forEach(v => {
-        document.getElementById("view-" + v).classList.toggle("d-none", v !== menuName);
-        document.getElementById("nav-" + v).classList.toggle("active", v === menuName);
+    function switchNav(navTarget) {
+      const targets = ["home", "kartu", "laporan"];
+      targets.forEach(t => {
+        document.getElementById("view-" + t).classList.toggle("d-none", t !== navTarget);
+        document.getElementById("nav-" + t).classList.toggle("active", t === navTarget);
       });
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function cariData() {
       const keyword = document.getElementById("inputKeyword").value.trim();
-      if (!keyword) return alert("Masukkan NISN atau NIK terlebih dahulu!");
+      if (!keyword) return alert("Masukkan NISN atau NIK!");
 
       document.getElementById("searchSpinner").classList.remove("d-none");
 
@@ -530,12 +432,12 @@
         .then(data => {
           document.getElementById("searchSpinner").classList.add("d-none");
           if (!data.found) {
-            alert("Data tidak ditemukan di Master SIPINTAR sekolah.");
+            alert("Data tidak ditemukan di database SIPINTAR sekolah.");
             return;
           }
 
           currentSiswaData = data;
-          renderSiswaData(data);
+          renderDataSiswa(data);
         })
         .catch(err => {
           document.getElementById("searchSpinner").classList.add("d-none");
@@ -543,73 +445,71 @@
         });
     }
 
-    function renderSiswaData(data) {
-  document.getElementById("defaultIllustration").classList.add("d-none");
-  document.getElementById("studentDetailCard").classList.remove("d-none");
+    function renderDataSiswa(data) {
+      document.getElementById("defaultHero").classList.add("d-none");
+      document.getElementById("studentDataCard").classList.remove("d-none");
 
-  // --- TETAP (Menu Home) ---
-  document.getElementById("resNama").innerText = data.nama;
-  document.getElementById("resKelas").innerText = data.kelas;
-  document.getElementById("resLp").innerText = data.lp;
-  document.getElementById("resTahap").innerText = data.tahap;
-  document.getElementById("resNisn").innerText = data.nisn;
-  document.getElementById("resNik").innerText = data.nikMasked;
-  document.getElementById("resNoRek").innerText = data.noRekMasked;
-  document.getElementById("resVa").innerText = data.vaMasked;
-  document.getElementById("resNominal").innerText = "Rp " + Number(data.nominal || 0).toLocaleString("id-ID");
-  document.getElementById("resHp").innerText = data.hpMasked;
-  document.getElementById("resKeluarga").innerText = data.keluarga;
-  document.getElementById("resInstruksi").innerText = data.instruksi;
+      // Set Data Siswa & Info Keuangan
+      document.getElementById("resNama").innerText = data.nama;
+      document.getElementById("resNisn").innerText = data.nisn;
+      document.getElementById("resNik").innerText = data.nikMasked;
+      document.getElementById("resNoRek").innerText = data.noRekMasked;
+      document.getElementById("resVa").innerText = data.vaMasked;
+      document.getElementById("resNominal").innerText = "Rp " + Number(data.nominal || 0).toLocaleString("id-ID");
+      document.getElementById("resTahap").innerText = data.tahap;
 
-  setBadge("badgeAktivasi", data.statusAktivasi);
-  setBadge("badgeCair", data.statusCair);
+      // Set Badges
+      setBadge("badgeAktivasi", data.statusAktivasi);
+      setBadge("badgeCair", data.statusCair);
 
-  // --- DIGANTI (Menu Kartu dari Google Drive) ---
-  document.getElementById("kartuIdentitasSingkat").innerHTML =
-    `<strong>${data.nama}</strong> • NISN: <strong>${data.nisn}</strong> • Kelas: <strong>${data.kelas}</strong>`;
+      // Set Instruksi Pengelola
+      if (data.instruksi) {
+        document.getElementById("textInfoAktivasi").innerText = data.instruksi;
+      }
 
-  const emptyState = document.getElementById("kartuEmptyState");
-  const previewWrapper = document.getElementById("kartuPreviewWrapper");
-  const imgKartu = document.getElementById("imgKartuResmi");
-  const pdfInfo = document.getElementById("pdfKartuInfo");
-  const badgeKartu = document.getElementById("kartuStatusBadge");
+      // Set Kartu Drive
+      document.getElementById("kartuIdentitasSingkat").innerHTML =
+        `Siswa: <strong>${data.nama}</strong> (${data.nisn})`;
 
-  emptyState.classList.add("d-none");
-  imgKartu.classList.add("d-none");
-  pdfInfo.classList.add("d-none");
+      const emptyState = document.getElementById("kartuEmptyState");
+      const previewWrapper = document.getElementById("kartuPreviewWrapper");
+      const imgKartu = document.getElementById("imgKartuResmi");
+      const pdfInfo = document.getElementById("pdfKartuInfo");
 
-  if (data.kartu && data.kartu.tersedia) {
-    badgeKartu.className = "badge bg-success-subtle text-success-emphasis";
-    badgeKartu.innerText = "Tersedia";
-    previewWrapper.classList.remove("d-none");
+      emptyState.classList.add("d-none");
+      imgKartu.classList.add("d-none");
+      pdfInfo.classList.add("d-none");
 
-    document.getElementById("btnBukaKartu").href = data.kartu.viewUrl;
-    document.getElementById("btnUnduhKartu").href = data.kartu.downloadUrl;
+      if (data.kartu && data.kartu.tersedia) {
+        previewWrapper.classList.remove("d-none");
+        document.getElementById("btnBukaKartu").href = data.kartu.viewUrl;
+        document.getElementById("btnUnduhKartu").href = data.kartu.downloadUrl;
 
-    if (data.kartu.tipe === "image" && data.kartu.previewUrl) {
-      imgKartu.src = data.kartu.previewUrl;
-      imgKartu.classList.remove("d-none");
-    } else {
-      document.getElementById("namaFileKartu").innerText = data.kartu.namaFile || "Kartu_PIP";
-      pdfInfo.classList.remove("d-none");
+        if (data.kartu.tipe === "image" && data.kartu.previewUrl) {
+          imgKartu.src = data.kartu.previewUrl;
+          imgKartu.classList.remove("d-none");
+        } else {
+          document.getElementById("namaFileKartu").innerText = data.kartu.namaFile || "Kartu_PIP";
+          pdfInfo.classList.remove("d-none");
+        }
+      } else {
+        previewWrapper.classList.add("d-none");
+        emptyState.classList.remove("d-none");
+        emptyState.innerHTML = `<i class="bi bi-folder-x fs-1 d-block text-warning mb-2"></i><div>${(data.kartu && data.kartu.pesan) || "Kartu PIP resmi belum tersedia di Drive."}</div>`;
+      }
+
+      // Set Form Laporan Auto Fill
+      document.getElementById("laporAutoNamaNisn").value = `${data.nama} (${data.nisn})`;
     }
-  } else {
-    badgeKartu.className = "badge bg-warning-subtle text-warning-emphasis";
-    badgeKartu.innerText = "Belum Ada";
-    previewWrapper.classList.add("d-none");
-    emptyState.classList.remove("d-none");
-    emptyState.innerHTML =
-      `<i class="bi bi-folder-x fs-1 d-block text-warning mb-2"></i>` +
-      `<div>${(data.kartu && data.kartu.pesan) || "Kartu PIP resmi belum tersedia di folder Drive sekolah."}</div>`;
-  }
 
-  // --- TETAP (Menu Lapor) ---
-  document.getElementById("laporAlertBelumCari").classList.add("d-none");
-  document.getElementById("laporAutoNama").innerText = data.nama;
-  document.getElementById("laporAutoNisnKelas").innerText = `${data.nisn} / ${data.kelas}`;
-}
+    function setBadge(elemId, status) {
+      const el = document.getElementById(elemId);
+      const isSudah = status.toString().toLowerCase().includes("sudah");
+      el.innerText = isSudah ? "SUDAH" : "BELUM";
+      el.className = isSudah ? "badge-sudah" : "badge-belum";
+    }
 
-    // Kamera HP + Kompresi Otomatis
+    // Kamera HP + Auto Compress Canvas
     document.getElementById("cameraInput").addEventListener("change", function(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -646,15 +546,15 @@
     });
 
     function submitLaporan() {
-      if (!currentSiswaData) return alert("Cari data siswa terlebih dahulu sebelum melapor!");
+      if (!currentSiswaData) return alert("Cari NISN / NIK siswa terlebih dahulu!");
       const tglPengurusan = document.getElementById("laporTanggal").value;
       if (!tglPengurusan || !compressedBase64Image) {
-        return alert("Lengkapi tanggal pengurusan dan ambil foto bukti menggunakan kamera!");
+        return alert("Lengkapi tanggal pengurusan dan foto bukti via kamera!");
       }
 
       const btnKirim = document.getElementById("btnKirim");
       btnKirim.disabled = true;
-      btnKirim.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Mengirim Laporan...`;
+      btnKirim.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Mengirim...`;
 
       const payload = {
         action: "kirimLaporan",
@@ -677,10 +577,10 @@
       .then(res => res.json())
       .then(res => {
         btnKirim.disabled = false;
-        btnKirim.innerHTML = `<i class="bi bi-send-check-fill me-1"></i> Kirim Laporan Mandiri`;
+        btnKirim.innerHTML = `<i class="bi bi-send-fill me-1"></i> Kirim Laporan Mandiri`;
 
         if (res.success) {
-          alert("Laporan mandiri berhasil dikirim! Terima kasih.");
+          alert("Laporan mandiri berhasil dikirim!");
           location.reload();
         } else {
           alert("Gagal mengirim laporan: " + res.message);
@@ -688,8 +588,8 @@
       })
       .catch(err => {
         btnKirim.disabled = false;
-        btnKirim.innerHTML = `<i class="bi bi-send-check-fill me-1"></i> Kirim Laporan Mandiri`;
-        alert("Terjadi kesalahan jaringan: " + err.toString());
+        btnKirim.innerHTML = `<i class="bi bi-send-fill me-1"></i> Kirim Laporan Mandiri`;
+        alert("Kesalahan jaringan: " + err.toString());
       });
     }
   </script>
