@@ -544,52 +544,70 @@
     }
 
     function renderSiswaData(data) {
-      document.getElementById("defaultIllustration").classList.add("d-none");
-      document.getElementById("studentDetailCard").classList.remove("d-none");
+  document.getElementById("defaultIllustration").classList.add("d-none");
+  document.getElementById("studentDetailCard").classList.remove("d-none");
 
-      // Menu Home
-      document.getElementById("resNama").innerText = data.nama;
-      document.getElementById("resKelas").innerText = data.kelas;
-      document.getElementById("resLp").innerText = data.lp;
-      document.getElementById("resTahap").innerText = data.tahap;
-      document.getElementById("resNisn").innerText = data.nisn;
-      document.getElementById("resNik").innerText = data.nikMasked;
-      document.getElementById("resNoRek").innerText = data.noRekMasked;
-      document.getElementById("resVa").innerText = data.vaMasked;
-      document.getElementById("resNominal").innerText = "Rp " + Number(data.nominal || 0).toLocaleString("id-ID");
-      document.getElementById("resHp").innerText = data.hpMasked;
-      document.getElementById("resKeluarga").innerText = data.keluarga;
-      document.getElementById("resInstruksi").innerText = data.instruksi;
+  // --- TETAP (Menu Home) ---
+  document.getElementById("resNama").innerText = data.nama;
+  document.getElementById("resKelas").innerText = data.kelas;
+  document.getElementById("resLp").innerText = data.lp;
+  document.getElementById("resTahap").innerText = data.tahap;
+  document.getElementById("resNisn").innerText = data.nisn;
+  document.getElementById("resNik").innerText = data.nikMasked;
+  document.getElementById("resNoRek").innerText = data.noRekMasked;
+  document.getElementById("resVa").innerText = data.vaMasked;
+  document.getElementById("resNominal").innerText = "Rp " + Number(data.nominal || 0).toLocaleString("id-ID");
+  document.getElementById("resHp").innerText = data.hpMasked;
+  document.getElementById("resKeluarga").innerText = data.keluarga;
+  document.getElementById("resInstruksi").innerText = data.instruksi;
 
-      setBadge("badgeAktivasi", data.statusAktivasi);
-      setBadge("badgeCair", data.statusCair);
+  setBadge("badgeAktivasi", data.statusAktivasi);
+  setBadge("badgeCair", data.statusCair);
 
-      // Menu Kartu
-      document.getElementById("kipNama").innerText = data.nama;
-      document.getElementById("kipNisn").innerText = data.nisn;
-      document.getElementById("kipKelas").innerText = data.kelas;
-      document.getElementById("kipLp").innerText = data.lp;
-      document.getElementById("kipRek").innerText = data.noRekMasked;
-      document.getElementById("kipTahapLabel").innerText = data.tahap;
-      document.getElementById("kartuStatusBadge").innerText = "NISN Terdaftar";
-      document.getElementById("kartuInfoText").innerHTML =
-        `<i class="bi bi-check-circle-fill text-success me-1"></i> Data kartu & rekening untuk <strong>${data.nama}</strong> (${data.tahap}) tampil sesuai database SIPINTAR sekolah.`;
+  // --- DIGANTI (Menu Kartu dari Google Drive) ---
+  document.getElementById("kartuIdentitasSingkat").innerHTML =
+    `<strong>${data.nama}</strong> • NISN: <strong>${data.nisn}</strong> • Kelas: <strong>${data.kelas}</strong>`;
 
-      // Menu Lapor
-      document.getElementById("laporAlertBelumCari").classList.add("d-none");
-      document.getElementById("laporAutoNama").innerText = data.nama;
-      document.getElementById("laporAutoNisnKelas").innerText = `${data.nisn} / ${data.kelas}`;
+  const emptyState = document.getElementById("kartuEmptyState");
+  const previewWrapper = document.getElementById("kartuPreviewWrapper");
+  const imgKartu = document.getElementById("imgKartuResmi");
+  const pdfInfo = document.getElementById("pdfKartuInfo");
+  const badgeKartu = document.getElementById("kartuStatusBadge");
+
+  emptyState.classList.add("d-none");
+  imgKartu.classList.add("d-none");
+  pdfInfo.classList.add("d-none");
+
+  if (data.kartu && data.kartu.tersedia) {
+    badgeKartu.className = "badge bg-success-subtle text-success-emphasis";
+    badgeKartu.innerText = "Tersedia";
+    previewWrapper.classList.remove("d-none");
+
+    document.getElementById("btnBukaKartu").href = data.kartu.viewUrl;
+    document.getElementById("btnUnduhKartu").href = data.kartu.downloadUrl;
+
+    if (data.kartu.tipe === "image" && data.kartu.previewUrl) {
+      imgKartu.src = data.kartu.previewUrl;
+      imgKartu.classList.remove("d-none");
+    } else {
+      document.getElementById("namaFileKartu").innerText = data.kartu.namaFile || "Kartu_PIP";
+      pdfInfo.classList.remove("d-none");
     }
+  } else {
+    badgeKartu.className = "badge bg-warning-subtle text-warning-emphasis";
+    badgeKartu.innerText = "Belum Ada";
+    previewWrapper.classList.add("d-none");
+    emptyState.classList.remove("d-none");
+    emptyState.innerHTML =
+      `<i class="bi bi-folder-x fs-1 d-block text-warning mb-2"></i>` +
+      `<div>${(data.kartu && data.kartu.pesan) || "Kartu PIP resmi belum tersedia di folder Drive sekolah."}</div>`;
+  }
 
-    function setBadge(elemId, status) {
-      const el = document.getElementById(elemId);
-      el.innerText = status;
-      if (status.toString().toLowerCase().includes("sudah")) {
-        el.className = "badge bg-success px-3 py-1";
-      } else {
-        el.className = "badge bg-warning text-dark px-3 py-1";
-      }
-    }
+  // --- TETAP (Menu Lapor) ---
+  document.getElementById("laporAlertBelumCari").classList.add("d-none");
+  document.getElementById("laporAutoNama").innerText = data.nama;
+  document.getElementById("laporAutoNisnKelas").innerText = `${data.nisn} / ${data.kelas}`;
+}
 
     // Kamera HP + Kompresi Otomatis
     document.getElementById("cameraInput").addEventListener("change", function(e) {
